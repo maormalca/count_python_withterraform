@@ -1,19 +1,26 @@
 provider "aws" {
-  access_key = "AKIA4QDUZQ7LHAVX6KFN"
-  secret_key = "N5xZRxRuyGTetAui60y+RcKx6KsY0dEcXyOR41ls"
+  access_key = "your_access_key"
+  secret_key = "your_secret_key"
   region     = "us-east-2"
 }
 
-resource "aws_instance" "exsample" {
+resource "aws_instance" "maor" {
   ami           = "ami-001089eb624938d9f"
   instance_type = "t2.micro"
-  key_name= "aws_key"
+  key_name = "aws_key"
   vpc_security_group_ids = [aws_security_group.allow_8080.id]
 
 provisioner "remote-exec" {
     inline = [
-      "touch hello.txt",
-      "echo helloworld remote provisioner >> hello.txt",
+      "sudo yum update -y",
+      "sudo yum install git -y",
+      "sudo yum install docker -y",
+      "git clone https://github.com/maormalca/count_python_withterraform.git",
+      "cd count_python_withterraform",
+      "docker build -t pythoncounter:1.0 .",
+      "docker run -d -p 8080:8080 pythoncounter:1.0",
+      "curl localhost:8080/count",
+
     ]
   }
 
