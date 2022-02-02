@@ -8,7 +8,7 @@ resource "aws_instance" "maor" {
   ami           = "ami-001089eb624938d9f"
   instance_type = "t2.micro"
   key_name = "aws_key"
-  vpc_security_group_ids = [aws_security_group.allow_8080.id]
+  vpc_security_group_ids = [aws_security_group.allow_8081.id]
 
 provisioner "remote-exec" {
     inline = [
