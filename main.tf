@@ -18,7 +18,7 @@ provisioner "remote-exec" {
       "git clone https://github.com/maormalca/count_python_withterraform.git",
       "cd count_python_withterraform",
       "docker build -t pythoncounter:1.0 .",
-      "docker run -d -p 8080:8080 pythoncounter:1.0",
+      "docker run -d -p 8081:8081 pythoncounter:1.0",
       "curl localhost:8080/count",
 
     ]
