@@ -19,7 +19,7 @@ provisioner "remote-exec" {
       "cd count_python_withterraform",
       "docker build -t pythoncounter:1.0 .",
       "docker run -d -p 8081:8081 pythoncounter:1.0",
-      "curl localhost:8080/count",
+      "curl localhost:8081/count",
 
     ]
   }
@@ -35,15 +35,15 @@ connection{
 
 
 }
-resource "aws_security_group" "allow_8080" {
-  name        = "allow_8080"
-  description = "Allow 8080 inbound traffic"
+resource "aws_security_group" "allow_8081" {
+  name        = "allow_8081"
+  description = "Allow 8081 inbound traffic"
   vpc_id      = "vpc-e4b8cf8f"
 
   ingress {
-    description      = "allow_8080"
-    from_port        = 8080
-    to_port          = 8080
+    description      = "allow_8081"
+    from_port        = 8081
+    to_port          = 8081
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
@@ -58,7 +58,7 @@ ingress {
 
 
   tags = {
-    Name = "allow_8080"
+    Name = "allow_8081"
   }
 }
 
